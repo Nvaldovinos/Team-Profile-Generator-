@@ -10,4 +10,6 @@ const Manager = require('./lib/Manager');
 
 
 // An empty array for team members 
-//
+
+
+//Generates HTML 
