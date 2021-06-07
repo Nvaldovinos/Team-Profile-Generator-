@@ -46,77 +46,77 @@ const empQuestions = () => {
             message: 'Manager: what is your office number? '
 
         }
-        //Get role array question for manager to decide what type of team member they would like to add to their team.
-        // const getRoleQuestions = [
-        //     {
-        //         type: 'list',
-        //         name: 'role',
-        //         message: 'What type of team memeber would you like to add to your team? ',
-        //         choices: ['Engineer', 'Intern', 'Exit'],
-        //     }
-        // ];
-        
-        // //Enginner array questions
-        // const engQuestions = [
-        //     {
-        //         type: 'input',
-        //         name: 'name',
-        //         message: 'Enginner: what is your name? ',
-        //     },
-        
-        //     {
-        //         type: 'input',
-        //         name: 'id',
-        //         message: 'Enginner: what is your ID? ',
-        //     },
-        
-        //     {
-        //         type: 'input',
-        //         name: 'email',
-        //         message: 'Engineer: what is your emal? ',
-        //     }, 
-        
-        //     {
-        //         type: 'input',
-        //         name: 'github',
-        //         message: 'Enginner: what is their GitHub username? ',
-        
-        //     },
-        // ]
-        
-        // //intern array questions
-        // const intQuestions = [
-        //     {
-        
-        //         type: 'input',
-        //         name: 'name',
-        //         message: 'Intern: what is your name? ',
-        //     },
-        
-        //     {
-        //         type: 'input',
-        //         name: 'id',
-        //         message: 'Intern: what is your ID? ',
-        //     },
-        
-        //     {
-        //         type: 'input',
-        //         name: 'email',
-        //         message: 'Intern: what is your emal? ',
-        //     }, 
-        
-        //     {
-        //         type: 'input',
-        //         name: 'school',
-        //         message: 'Intern: what school are you they attending? ',
-        
-        //     },
-        // ];
     ]);
+    //Get role array question for manager to decide what type of team member they would like to add to their team.
+    // const getRoleQuestions = [
+    //     {
+    //         type: 'list',
+    //         name: 'role',
+    //         message: 'What type of team memeber would you like to add to your team? ',
+    //         choices: ['Engineer', 'Intern', 'Exit'],
+    //     }
+    // ];
+
+    // //Enginner array questions
+    // const engQuestions = [
+    //     {
+    //         type: 'input',
+    //         name: 'name',
+    //         message: 'Enginner: what is your name? ',
+    //     },
+
+    //     {
+    //         type: 'input',
+    //         name: 'id',
+    //         message: 'Enginner: what is your ID? ',
+    //     },
+
+    //     {
+    //         type: 'input',
+    //         name: 'email',
+    //         message: 'Engineer: what is your emal? ',
+    //     }, 
+
+    //     {
+    //         type: 'input',
+    //         name: 'github',
+    //         message: 'Enginner: what is their GitHub username? ',
+
+    //     },
+    // ]
+
+    // //intern array questions
+    // const intQuestions = [
+    //     {
+
+    //         type: 'input',
+    //         name: 'name',
+    //         message: 'Intern: what is your name? ',
+    //     },
+
+    //     {
+    //         type: 'input',
+    //         name: 'id',
+    //         message: 'Intern: what is your ID? ',
+    //     },
+
+    //     {
+    //         type: 'input',
+    //         name: 'email',
+    //         message: 'Intern: what is your emal? ',
+    //     }, 
+
+    //     {
+    //         type: 'input',
+    //         name: 'school',
+    //         message: 'Intern: what school are you they attending? ',
+
+    //     },
+    // ];
 };
 
 const firstHTML = (answers) =>
-`<!DOCTYPE html>
+    `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -127,7 +127,8 @@ const firstHTML = (answers) =>
 <body>
   <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">Meet our Team!</h1>
+    <h1 class="display-4 text-center">Meet our Team!</h1>
+    <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${answers.name}</h5>
     <p class="card-text">${answers.role}</p>
@@ -135,10 +136,13 @@ const firstHTML = (answers) =>
   <ul class="list-group list-group-flush">
     <li class="list-group-item">ID: ${answers.id}</li>
     <li class="list-group-item">Office Number: ${answers.OfficeNumber}</li>
+    <li class="list-group-item">A third item</li>
   </ul>
   <div class="card-body">
-    <a href="#" class="card-link">Email: ${answers.email}</a>
+    <a href="#" class="card-link">${answers.email}</a>
     <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
   </div>
 </div>
 </body>
@@ -146,13 +150,14 @@ const firstHTML = (answers) =>
 
 
 
+
 //Function to write README file
 const init = () => {
     empQuestions()
-      .then((answers) => writeFileAsync('index.html', firstHTML(answers)))
-      .then(() => console.log('Successfully wrote to index.html'))
-      .catch((err) => console.error(err));
-  };
+        .then((answers) => writeFileAsync('index.html', firstHTML(answers)))
+        .then(() => console.log('Successfully wrote to index.html'))
+        .catch((err) => console.error(err));
+};
 
 
 
