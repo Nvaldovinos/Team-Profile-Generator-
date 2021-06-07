@@ -11,5 +11,13 @@ const Manager = require('./lib/Manager');
 
 // An empty array for team members 
 
+const questions = [{
+    
+    type: 'input',
+    name: 'name',
+    message: 'What is your name? ',
+},
 
-//Generates HTML 
+
+
+]
