@@ -1,0 +1,25 @@
+{
+  "name": "team-profile-generator-",
+  "version": "1.0.0",
+  "description": "Generates a profile of team members ",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nvaldovinos/Team-Profile-Generator-.git"
+  },
+  "author": "Naomi Valdovinos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nvaldovinos/Team-Profile-Generator-/issues"
+  },
+  "homepage": "https://github.com/Nvaldovinos/Team-Profile-Generator-#readme",
+  "dependencies": {
+    "inquirer": "^8.1.0"
+  }
+}
