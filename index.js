@@ -9,114 +9,114 @@ const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
+const { publicDecrypt } = require('crypto');
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
+//create an empty array to store employees 
+let teamMember = [];
+
 //Manager array questions 
-const empQuestions = () => {
-    return inquirer.prompt([
-        {
-            type: 'list',
-            name: 'role',
-            message: 'What is your role? ',
-            choices: ['Engineer', 'Intern', 'Manager'],
-        },
+const mangQuestions = () => {
+  return inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'Manager: what is your name? ',
+    },
 
-        {
-            type: 'input',
-            name: 'name',
-            message: 'Manager: what is your name? ',
-        },
+    {
+      type: 'input',
+      name: 'id',
+      message: 'Manager: what is your ID? ',
+    },
 
-        {
-            type: 'input',
-            name: 'id',
-            message: 'Manager: what is your ID? ',
-        },
+    {
+      type: 'input',
+      name: 'email',
+      message: 'Manager: what is your emal? ',
+    },
 
-        {
-            type: 'input',
-            name: 'email',
-            message: 'Manager: what is your emal? ',
-        },
+    {
+      type: 'input',
+      name: 'OfficeNumber',
+      message: 'Manager: what is your office number? '
 
-        {
-            type: 'input',
-            name: 'OfficeNumber',
-            message: 'Manager: what is your office number? '
+    }
+  ]);
 
-        }
-    ]);
-    //Get role array question for manager to decide what type of team member they would like to add to their team.
-    // const getRoleQuestions = [
-    //     {
-    //         type: 'list',
-    //         name: 'role',
-    //         message: 'What type of team memeber would you like to add to your team? ',
-    //         choices: ['Engineer', 'Intern', 'Exit'],
-    //     }
-    // ];
 
-    // //Enginner array questions
-    // const engQuestions = [
-    //     {
-    //         type: 'input',
-    //         name: 'name',
-    //         message: 'Enginner: what is your name? ',
-    //     },
 
-    //     {
-    //         type: 'input',
-    //         name: 'id',
-    //         message: 'Enginner: what is your ID? ',
-    //     },
+  //Get role array question for manager to decide what type of team member they would like to add to their team.
+  // const getRoleQuestions = [
+  //     {
+  //         type: 'list',
+  //         name: 'role',
+  //         message: 'What type of team memeber would you like to add to your team? ',
+  //         choices: ['Engineer', 'Intern', 'Exit'],
+  //     }
+  // ];
 
-    //     {
-    //         type: 'input',
-    //         name: 'email',
-    //         message: 'Engineer: what is your emal? ',
-    //     }, 
+  // //Enginner array questions
+  // const engQuestions = [
+  //     {
+  //         type: 'input',
+  //         name: 'name',
+  //         message: 'Enginner: what is your name? ',
+  //     },
 
-    //     {
-    //         type: 'input',
-    //         name: 'github',
-    //         message: 'Enginner: what is their GitHub username? ',
+  //     {
+  //         type: 'input',
+  //         name: 'id',
+  //         message: 'Enginner: what is your ID? ',
+  //     },
 
-    //     },
-    // ]
+  //     {
+  //         type: 'input',
+  //         name: 'email',
+  //         message: 'Engineer: what is your emal? ',
+  //     }, 
 
-    // //intern array questions
-    // const intQuestions = [
-    //     {
+  //     {
+  //         type: 'input',
+  //         name: 'github',
+  //         message: 'Enginner: what is their GitHub username? ',
 
-    //         type: 'input',
-    //         name: 'name',
-    //         message: 'Intern: what is your name? ',
-    //     },
+  //     },
+  // ]
 
-    //     {
-    //         type: 'input',
-    //         name: 'id',
-    //         message: 'Intern: what is your ID? ',
-    //     },
+  // //intern array questions
+  // const intQuestions = [
+  //     {
 
-    //     {
-    //         type: 'input',
-    //         name: 'email',
-    //         message: 'Intern: what is your emal? ',
-    //     }, 
+  //         type: 'input',
+  //         name: 'name',
+  //         message: 'Intern: what is your name? ',
+  //     },
 
-    //     {
-    //         type: 'input',
-    //         name: 'school',
-    //         message: 'Intern: what school are you they attending? ',
+  //     {
+  //         type: 'input',
+  //         name: 'id',
+  //         message: 'Intern: what is your ID? ',
+  //     },
 
-    //     },
-    // ];
+  //     {
+  //         type: 'input',
+  //         name: 'email',
+  //         message: 'Intern: what is your emal? ',
+  //     }, 
+
+  //     {
+  //         type: 'input',
+  //         name: 'school',
+  //         message: 'Intern: what school are you they attending? ',
+
+  //     },
+  // ];
 };
 
 const firstHTML = (answers) =>
-    `<!DOCTYPE html>
+  `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -148,77 +148,102 @@ const firstHTML = (answers) =>
 </body>
 </html>`;
 
+const engQuestion = () => {
+  inquirer.prompt([
+    {
+      type: 'input',
+      name: 'name',
+      message: 'Enginner: what is your name? ',
+    },
+
+    {
+      type: 'input',
+      name: 'id',
+      message: 'Enginner: what is your ID? ',
+    },
+
+    {
+      type: 'input',
+      name: 'email',
+      message: 'Engineer: what is your emal? ',
+    },
+
+    {
+      type: 'input',
+      name: 'github',
+      message: 'Enginner: what is their GitHub username? ',
+
+    },
+  ]) .then((answers) => {
+    var engineer = new Engineer(answers.name, answers.id, answers.email, answers.github);
+    teamMember.push(engineer);
+    teamQuestion();
+   console.log(teamMember)
+  })
+};
+
+const intQuestion = () =>{
+
+}
+
+const createTeam = () =>{
+  //
+}
+
+const teamQuestion = () => {
+  inquirer.prompt([
+    {
+      type: 'list',
+      name: 'role',
+      message: 'What type of team memeber would you like to add to your team? ',
+      choices: ['Engineer', 'Intern', 'Exit'],
+    }
+  ]).then((answer) => {
+    switch (answer.role) {
+      case 'Engineer':
+        engQuestion();
+        break;
+
+      case 'Intern':
+        intQuestion();
+        break;
+
+      case 'Exit':
+        createTeam();
+        break;
+    }
+  })
+};
 
 
 
-//Function to write README file
+//Function to write file
 const init = () => {
-    empQuestions()
-        .then((answers) => writeFileAsync('index.html', firstHTML(answers)))
-        .then(() => console.log('Successfully wrote to index.html'))
-        .catch((err) => console.error(err));
+  mangQuestions()
+    .then((answers) => {
+      var manager = new Manager(answers.name, answers.id, answers.email, answers.OfficeNumber);
+      teamMember.push(manager);
+      teamQuestion();
+    })
+
+    
+
+
+
+
+
 };
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// const init = () => {
+//     mangQuestions()
+//         .then((answers) => writeFileAsync('index.html', firstHTML(answers)))
+//         .then((answers) => writeFileAsync('index.html', firstHTML(answers)))
+//         .then(() => console.log('Successfully wrote to index.html'))
+//         .catch((err) => console.error(err));
+// };
 
 
 
